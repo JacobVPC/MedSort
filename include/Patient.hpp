@@ -1,5 +1,6 @@
 #include <ostream>
 #include <string>
+#include <vector>
 
 
 
@@ -69,3 +70,9 @@ public:
 
 };
 
+
+//vectors to store patients
+
+extern std::vector<Patient*> Patients;
+extern std::vector<ShortTerm_Patient*> ShortTerm_Patients;
+extern std::vector<LongTerm_Patient*> LongTerm_Patients;
