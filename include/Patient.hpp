@@ -15,7 +15,7 @@ protected:
 
 public:
     //constructor
-    Patient(int a, int p, std::string n) : age(a) , priority(p) , name(n){}
+    Patient(int a, std::string n,int p) : age(a) , priority(p) , name(n){}
 
     virtual std::string toString() const;
 
@@ -36,7 +36,7 @@ private:
 public:
     //constructor
     ShortTerm_Patient(int a, std::string n, int p, std::string ta, std::string per) 
-    : Patient(a,p,n),
+    : Patient(a,n,p),
     timeAssessed(ta),
     perscription(per){}
 
@@ -54,13 +54,13 @@ class LongTerm_Patient : public Patient{
 private:
 
     std::string timeAssessed;
-    int timeNeeded;
+    std::string timeNeeded;
     std::string perscription;
 
 public:
     //constructor
-    LongTerm_Patient(int a,int p, std::string n, std::string ta, int tn, std::string per) 
-    : Patient(a,p,n),
+    LongTerm_Patient(int a,std::string n, int p, std::string ta, std::string  tn, std::string per) 
+    : Patient(a,n,p),
     timeAssessed(ta),
     timeNeeded(tn), 
     perscription(per){}

@@ -3,29 +3,29 @@
 
 
 std::string Patient::toString() const {
-    return "\n" + 
-    std::to_string(age) + "\n" + 
-    std::to_string(priority) + "\n" + 
-    name;
+    return 
+    "\n Age : " + std::to_string(age) + 
+    "\n Name : " +  name +
+    "\n Priority : " +  std::to_string(priority);
 }
 
 std::string ShortTerm_Patient::toString() const {
-    return "\n" + 
-    std::to_string(age) + "\n" + 
-    std::to_string(priority) + "\n" + 
-    name+ "\n" +
-    timeAssessed + "\n" +
-    perscription;
+    return 
+    "\n Age : " + std::to_string(age) + 
+    "\n Name : " +  name +
+    "\n Priority : " +  std::to_string(priority) + 
+    "\n Time Assessed :" +  timeAssessed +
+    "\n Perscription : " +perscription;
 }
 
 std::string LongTerm_Patient::toString() const {
-    return "\n" + 
-    std::to_string(age) + "\n" + 
-    std::to_string(priority) + "\n" + 
-    name+ "\n" +
-    timeAssessed + "\n" +
-    std::to_string(timeNeeded)+ "\n" +
-    perscription;
+    return 
+    "\n Age : " + std::to_string(age) + 
+    "\n Name : " +  name +
+    "\n Priority : " +  std::to_string(priority) + 
+    "\n Time Assessed :" +  timeAssessed +
+    "\n Time Needed : " + timeNeeded +
+    "\n Perscription : " + perscription;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Patient& p){
