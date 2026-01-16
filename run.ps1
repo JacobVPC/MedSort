@@ -1,2 +1,2 @@
-g++ main.cpp src/Patient.cpp src/HospitalStaff.cpp -o main
+g++ main.cpp (get-item .\src\*.cpp) -o main
 ./main

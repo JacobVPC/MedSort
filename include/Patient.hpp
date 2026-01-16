@@ -1,6 +1,9 @@
+#ifndef PATIENT_HPP
+#define PATIENT_HPP
+
 #include <ostream>
 #include <string>
-#include <vector>
+
 
 
 
@@ -19,6 +22,8 @@ public:
     Patient(int a, std::string n,int p) : age(a) , priority(p) , name(n){}
 
     virtual std::string toString() const;
+
+    int getPriority() const;
 
 };
 std::ostream& operator<<(std::ostream&, const Patient&);
@@ -71,8 +76,4 @@ public:
 };
 
 
-//vectors to store patients
-
-extern std::vector<Patient*> Patients;
-extern std::vector<ShortTerm_Patient*> ShortTerm_Patients;
-extern std::vector<LongTerm_Patient*> LongTerm_Patients;
+#endif

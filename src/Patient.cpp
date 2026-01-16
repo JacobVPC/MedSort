@@ -39,3 +39,6 @@ std::ostream& operator<<(std::ostream& stream, const Patient& p){
     return stream;
 }
 
+int Patient::getPriority() const {
+    return priority;
+}

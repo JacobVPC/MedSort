@@ -1,4 +1,7 @@
+#ifndef HOSPITALSTAFF_HPP
+#define HOSPITALSTAFF_HPP
 #include "../include/Patient.hpp"
+#include <vector>
 
 
 //base class
@@ -53,3 +56,5 @@ void dismissShortTerm_Patient(ShortTerm_Patient*) const;
 };
 
 
+void PrioritizePatients(std::vector<Patient*>& vec);
+#endif

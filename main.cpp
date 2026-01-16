@@ -2,17 +2,23 @@
 // MedSort main function
 // Jacob, Memphis, Cody
 #include "include/Patient.hpp"
+#include "include/HospitalData.hpp"
+#include "include/HospitalStaff.hpp"
 #include <iostream>
 
 
 int main(){
-    Patient memphis(17,"memphis",3);
-    ShortTerm_Patient jacob(17,"jacob",1, "12:54pm", "advil");
-    LongTerm_Patient Cody(18,"Cody",1,"3:31pm","14 weeks", "melatonin");
+    Patients.push_back(new Patient(17,"memphis",3));
+    Patients.push_back(new Patient(17,"jacob",1));
+    Patients.push_back(new Patient(18,"Cody",1));
 
-    std::cout << memphis;
-    std::cout << jacob;
-    std::cout << Cody;
-    
+    std::cout << *Patients.at(0);
+    std::cout << *Patients.at(1);
+    std::cout << *Patients.at(2);
+    PrioritizePatients(Patients);
+    std::cout << Patients.at(0)->getPriority();
+    std::cout << Patients.at(1)->getPriority();
+    std::cout << Patients.at(2)->getPriority();
 
+    std::cout << *Patients.at(0);
 }
