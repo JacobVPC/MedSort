@@ -13,47 +13,40 @@
 /// IMPORTANT NOTICE
     //
 
-prescription::prescription{
-private:
-    // Variables
-    std::string Treatment;
-    std::string Name;
-public:
-    int Stock;
-    // constructor
-    prescription(std::string Name, std::string Treatment, int Stock) : Name(Name) , Treatment(Treatment) , Stock(Stock){};
-    // returns the amount in stock
-    int prescription::GetStock()const{
-        return Stock;
-    }
-    // Returns the Name of the poscripton
-    std::string prescription::GetName()const{
-        return Name;
-    }
-    // Returns the Treatment (diagnosis) that the Prescription can help
-    std::string prescription::GetTreatment()const{
-        return Treatment;
-    }
-    // Allows for easy printing of Prescriptiones
-    std::string prescription::prescriptionToString()const{
-        return "\n\n----------------------\n\n" + Name + "\n\nTeatment = " + Treatment + "\n\nStock = " + std::to_string(Stock) + "\n\n----------------------";
-    }
-    // Alows for easy Inputing into file
-    std::string prescription::prescriptionToFile()const{
-        return Name + "\n" + std::to_string(Stock) + "\n" + Treatment + "\n";
-    }
-};
+
+// constructor
+Prescription::Prescription(std::string Name, std::string Treatment, int Stock) : Name(Name) , Treatment(Treatment) , Stock(Stock){};
+// returns the amount in stock
+int Prescription::GetStock()const{
+    return Stock;
+}
+// Returns the Name of the poscripton
+std::string Prescription::GetName()const{
+    return Name;
+}
+// Returns the Treatment (diagnosis) that the Prescription can help
+std::string Prescription::GetTreatment()const{
+    return Treatment;
+}
+// Allows for easy printing of Prescriptiones
+std::string Prescription::prescriptionToString()const{
+    return "\n\n----------------------\n\n" + Name + "\n\nTeatment = " + Treatment + "\n\nStock = " + std::to_string(Stock) + "\n\n----------------------";
+}
+// Alows for easy Inputing into file
+std::string Prescription::prescriptionToFile()const{
+    return Name + "\n" + std::to_string(Stock) + "\n" + Treatment + "\n";
+}
 
 
 // Overlaods the "<<" Operator for easy printing
-std::ostream& operator<<(std::ostream& stream, const prescription& P) {
+std::ostream& operator<<(std::ostream& stream, const Prescription& P) {
     stream << P.prescriptionToString();
     return stream;
 };
 
 
 // Prints all Prescriptions to a file with one function
-void AllPrescriptionToFile(std::vector<prescription> vec){
+void AllPrescriptionToFile(std::vector<Prescription> vec){
     std::ofstream outFile;
     outFile.open("prescriptions.txt");
     for(int i=0; i<vec.size(); i=i+1){
@@ -64,7 +57,7 @@ void AllPrescriptionToFile(std::vector<prescription> vec){
 
 
 /// A Fuction that finds the Prescription based off only a input of the Name
-prescription& NameToPrescription(std::string Name, std::vector<prescription>& vec){
+Prescription& NameToPrescription(std::string Name, std::vector<Prescription>& vec){
     for(int i=0; i<vec.size(); i=i+1){
         if(vec[i].GetName() == Name){
             return vec[i];
@@ -75,7 +68,7 @@ prescription& NameToPrescription(std::string Name, std::vector<prescription>& ve
 
 
 // Manual prescripton finder
-prescription& ManualPrescription(std::string Name,/*/Diognosis/*/ std::vector<prescription>& vec){
+Prescription& ManualPrescription(std::string Name,/*/Diognosis/*/ std::vector<Prescription>& vec){
     bool check = false;
     std::cout << "\n\n----------------------";
     for(int i=0; i<vec.size(); i=i+1){
@@ -98,7 +91,7 @@ prescription& ManualPrescription(std::string Name,/*/Diognosis/*/ std::vector<pr
 }
 
 //Automatic prescription finder
-prescription& AutomaticPrescription(std::string Target,/*/Diognosis/*/ std::vector<prescription>& vec){
+Prescription& AutomaticPrescription(std::string Target,/*/Diognosis/*/ std::vector<Prescription>& vec){
     bool check = false;
     std::string ans;
     std::string Temp_Name;
@@ -133,22 +126,23 @@ prescription& AutomaticPrescription(std::string Target,/*/Diognosis/*/ std::vect
 }
 
 
-void FillPrescriptionVector() {
-    prescriptionVector.push_back(prescription("aspirin", "headache", 10));
-    prescriptionVector.push_back(prescription("ibuprofen", "pain", 15));
-    prescriptionVector.push_back(prescription("paracetamol", "fever", 20));
-    prescriptionVector.push_back(prescription("amoxicillin", "infection", 8));
-    prescriptionVector.push_back(prescription("cough syrup", "cough", 12));
-    prescriptionVector.push_back(prescription("loratadine", "allergy", 18));
-    prescriptionVector.push_back(prescription("omeprazole", "acid reflux", 7));
-    prescriptionVector.push_back(prescription("metformin", "diabetes", 9));
-    prescriptionVector.push_back(prescription("atorvastatin", "cholesterol", 14));
-    prescriptionVector.push_back(prescription("vitamin c", "immune support", 25));
+void FillPrescriptionVector(std::vector<Prescription> &prescriptionVector) {
+    
+    prescriptionVector.push_back(Prescription("aspirin", "headache", 10));
+    prescriptionVector.push_back(Prescription("ibuprofen", "pain", 15));
+    prescriptionVector.push_back(Prescription("paracetamol", "fever", 20));
+    prescriptionVector.push_back(Prescription("amoxicillin", "infection", 8));
+    prescriptionVector.push_back(Prescription("cough syrup", "cough", 12));
+    prescriptionVector.push_back(Prescription("loratadine", "allergy", 18));
+    prescriptionVector.push_back(Prescription("omeprazole", "acid reflux", 7));
+    prescriptionVector.push_back(Prescription("metformin", "diabetes", 9));
+    prescriptionVector.push_back(Prescription("atorvastatin", "cholesterol", 14));
+    prescriptionVector.push_back(Prescription("vitamin c", "immune support", 25));
 }
 
 
-int main (){
-    FillPrescriptionVector();
-    AllPrescriptionToFile(prescriptionVector);
-    AutomaticPrescription("headache", prescriptionVector);
-}
+// int main (){
+//     FillPrescriptionVector();
+//     AllPrescriptionToFile(prescriptionVector);
+//     AutomaticPrescription("headache", prescriptionVector);
+// }

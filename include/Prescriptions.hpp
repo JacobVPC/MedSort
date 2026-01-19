@@ -11,7 +11,7 @@
 /// IMPORTANT NOTICE
     //
 
-class prescription{
+class Prescription {
 private:
     // Variables
     std::string Treatment;
@@ -19,7 +19,7 @@ private:
 public:
     int Stock;
     // constructor
-    prescription(std::string Name, std::string Treatment, int Stock);
+    Prescription(std::string Name, std::string Treatment, int Stock);
 
     int GetStock()const;
 
@@ -33,16 +33,16 @@ public:
 };
 
 
-std::ostream& operator<<(std::ostream& stream, const prescription& P);
+std::ostream& operator<<(std::ostream& stream, const Prescription& P);
 
 
-void AllPrescriptionToFile(std::vector<prescription> vec);
+void AllPrescriptionToFile(std::vector<Prescription> vec);
 
-prescription& NameToPrescription(std::string Name, std::vector<prescription>& vec);
+Prescription& NameToPrescription(std::string Name, std::vector<Prescription>& vec);
 
-prescription& ManualPrescription(std::string Name,/*/Diognosis/*/ std::vector<prescription>& vec);
+Prescription& ManualPrescription(std::string Name,/*/Diognosis/*/ std::vector<Prescription>& vec);
 
-//Automatic prescription finder
-prescription& AutomaticPrescription(std::string Target,/*/Diognosis/*/ std::vector<prescription>& vec);
+//Automatic Prescription finder
+Prescription& AutomaticPrescription(std::string Target,/*/Diognosis/*/ std::vector<Prescription>& vec);
 
-void FillPrescriptionVector();
+void FillPrescriptionVector(std::vector<Prescription>&);
