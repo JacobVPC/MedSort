@@ -1,4 +1,8 @@
 #include "../include/HospitalStaff.hpp"
+#include "../include/HospitalData.hpp"
+#include <string>
+#include <vector>
+#include <iostream>
 
 
 
@@ -18,15 +22,48 @@ void PrioritizePatients(std::vector<Patient*>& vec){
     }
 }
 
+
+//HospitalStaff base class
+void HospitalStaff::seePatients(std::vector<Patient*>& vec) const { //based of prioritization function
+    std::cout<< "Showing patients in order of priority: \n";
+    PrioritizePatients(vec);
+    for (int i = 0; i < vec.size(); i++) {
+        std::cout << *vec.at(i);
+    }
+
+
+};  
+
+
+
+void HospitalStaff::MedInventory() const {
+    //memphis will fill this in later with file code
+};
+
 //nurse class
 //--------------------------------------------------------------
 
+//also has see patients from base class 
+//also has med inventory from base class
 
-void Nurse::MedInventory() const {};
+void Nurse::addPatient() const {
+    std::string name;
+    int age;
+    int priority;
 
-void Nurse::seePatients() const {}; //based of prioritization function
+    std::cout << "Enter patient name: ";
+    std::getline(std::cin, name);
+    std::cout << "Enter patient age: ";
+    std::cin >> age;
+    std::cout << "Enter patient priority (1-5): ";
+    std::cin >> priority;
 
-void Nurse::addPatient(Patient*) const {};
+    // Create a new patient and add it to the vector
+    Patient* newPatient = new Patient(age, name, priority);
+    Patients.push_back(newPatient);
+    std::cout << "Patient added: " << *newPatient << "\n";
+
+};
 
 
 
@@ -35,14 +72,74 @@ void Nurse::addPatient(Patient*) const {};
 //doctor class
 //--------------------------------------------------------------
 
-void Doctor::MedInventory() const {};
+//also has see patients from base class 
+//also has med inventory from base class
 
-void Doctor::seePatients() const {};  //based of prioritization function
+void Doctor::addShortTerm_Patient(Patient* p) const {
+    //adds a short term patient from patient vector
 
-void Doctor::addShortTerm_Patient(Patient*) const {};
+    std::string timeAssessed;
+    std::string perscription;
+    std::cout << "Enter time assessed: ";
+    std::getline(std::cin, timeAssessed);
+    std::cout << "Enter perscription: ";
+    std::getline(std::cin, perscription);
 
-void Doctor::addLongTerm_Patient(Patient*) const {};
+    // Create a new short term patient and add it to the vector and remove from patient vector
+    ShortTerm_Patient* newShortTermPatient = new ShortTerm_Patient(p->getAge(), p->getName(), p->getPriority(), timeAssessed, perscription);
+    ShortTerm_Patients.push_back(newShortTermPatient);
 
-void Doctor::dismissLongTerm_Patient(LongTerm_Patient*) const {};
+    // Remove from general Patients vector
+    auto it = std::find(Patients.begin(), Patients.end(), p);
+    if (it != Patients.end()) {
+        Patients.erase(it);
+    }
+};
 
-void Doctor::dismissShortTerm_Patient(ShortTerm_Patient*) const {};
+
+
+void Doctor::addLongTerm_Patient(Patient* p) const {
+    //adds a long term patient from patient vector
+    std::string timeAssessed;
+    std::string TimeNeeded;
+    std::string perscription;
+
+    std::cout << "Enter time assessed: ";
+    std::getline(std::cin, timeAssessed);
+    std::cout << "Enter time needed: ";
+    std::getline(std::cin, TimeNeeded);
+    std::cout << "Enter perscription: ";
+    std::getline(std::cin, perscription);
+
+    // makes a new longterm patient to add to new vector
+    LongTerm_Patient* newLongTermPatient = new LongTerm_Patient(p->getAge(), p->getName(), p->getPriority(), timeAssessed, TimeNeeded, perscription);
+    LongTerm_Patients.push_back(newLongTermPatient);
+
+    // Remove from Patients vector
+    auto it = std::find(Patients.begin(), Patients.end(), p);
+    if (it != Patients.end()) {
+        Patients.erase(it);
+    }
+};
+
+
+
+void Doctor::dismissLongTerm_Patient(LongTerm_Patient* Patient) const {
+    //removes a long term patient from long term vector
+
+    auto it = std::find(LongTerm_Patients.begin(), LongTerm_Patients.end(), Patient);
+    if (it != LongTerm_Patients.end()) {
+        LongTerm_Patients.erase(it);
+    }
+};
+
+
+
+void Doctor::dismissShortTerm_Patient(ShortTerm_Patient* Patient) const {
+    //removes a short term patient from short term vector
+
+    auto it = std::find(ShortTerm_Patients.begin(), ShortTerm_Patients.end(), Patient);
+    if (it != ShortTerm_Patients.end()) {
+        ShortTerm_Patients.erase(it);
+    }
+};

@@ -12,8 +12,8 @@ class HospitalStaff{
 public:
 //all methods will pure virtual because to make base class abstract
 
-virtual void MedInventory() const = 0; 
-virtual void seePatients() const = 0;
+void MedInventory() const; //file
+void seePatients(std::vector<Patient*>& vec) const; //prioritization is also being done here
 
 };
 
@@ -26,11 +26,7 @@ class Nurse : public HospitalStaff{
 
 public:
 
-void MedInventory() const override;
-
-void seePatients() const override;
-
-void addPatient(Patient*) const;
+void addPatient() const;
 
 };
 
@@ -43,16 +39,12 @@ class Doctor : public HospitalStaff{
 
 public:
 
-void MedInventory() const override;
 
-void seePatients() const override;
+void addShortTerm_Patient(Patient* p) const;
+void addLongTerm_Patient(Patient* p) const;
 
-void addShortTerm_Patient(Patient*) const;
-void addLongTerm_Patient(Patient*) const;
-
-void dismissLongTerm_Patient(LongTerm_Patient*) const;
-void dismissShortTerm_Patient(ShortTerm_Patient*) const;
-
+void dismissLongTerm_Patient(LongTerm_Patient* Patient) const;
+void dismissShortTerm_Patient(ShortTerm_Patient* Patient) const;
 };
 
 

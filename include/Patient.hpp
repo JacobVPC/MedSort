@@ -23,6 +23,8 @@ public:
 
     virtual std::string toString() const;
 
+    int getAge() const;
+    std::string getName() const;
     int getPriority() const;
 
 };

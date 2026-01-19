@@ -42,3 +42,11 @@ std::ostream& operator<<(std::ostream& stream, const Patient& p){
 int Patient::getPriority() const {
     return priority;
 }
+
+int Patient::getAge() const {
+    return age;
+}
+
+std::string Patient::getName() const {
+    return name;
+}
