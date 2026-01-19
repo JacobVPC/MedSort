@@ -1,0 +1,30 @@
+aspirin
+10
+headache
+ibuprofen
+15
+pain
+paracetamol
+20
+fever
+amoxicillin
+8
+infection
+cough syrup
+12
+cough
+loratadine
+18
+allergy
+omeprazole
+7
+acid reflux
+metformin
+9
+diabetes
+atorvastatin
+14
+cholesterol
+vitamin c
+25
+immune support
