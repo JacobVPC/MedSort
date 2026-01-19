@@ -6,6 +6,7 @@
 #include "include/HospitalStaff.hpp"
 #include <iostream>
 
+std::vector<prescription> prescriptionVector;
 
 int main(){
     Patients.push_back(new Patient(17,"memphis",3));
@@ -21,4 +22,11 @@ int main(){
     std::cout << Patients.at(2)->getPriority();
 
     std::cout << *Patients.at(0);
+
+    // testing prescrti[tions
+
+    // std::cout << "\n\nPrescription Code\n----------------------\n\n";
+    // FillPrescriptionVector();
+    // AllPrescriptionToFile(prescriptionVector);
+    // AutomaticPrescription("headache", prescriptionVector);
 }
