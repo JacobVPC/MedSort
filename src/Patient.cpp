@@ -6,7 +6,7 @@ std::string Patient::toString() const {
     return 
     "\n Age : " + std::to_string(age) + 
     "\n Patient Name : " +  name +
-    "\n Priority : " +  std::to_string(priority)+"\n"
+    "\n Priority : " +  std::to_string(priority)+
     "\n Sickness : " + sickness + "\n";
 }
 

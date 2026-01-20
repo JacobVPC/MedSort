@@ -106,46 +106,50 @@ int main(){
         std::cout << "\ndoctor Menu:\n1. See Patients\n2. See All Patients\n3. Add Short-Term Patient\n4. Add Long-Term Patient\n5. Dismiss Short-Term Patient\n6. Dismiss Long-Term Patient\n7. Go to persciption menu\n8. Logout\nEnter choice: ";
         std::getline(std::cin, input);
         int choice;
-        if (input == "1") {
+        if (input == "1") {  //see general patients only
             Doctor doctor;
             doctor.seePatients(Patients);
 
-        } else if (input == "2") {
+        } else if (input == "2") { //see all patients
             Doctor doctor;
             doctor.seeAllPatients();
 
-        } else if (input == "3") {
+        } else if (input == "3") { //add short term patient
             Doctor doctor;
             //will need to pass a patient pointer here from patient vector as index
             std::cout << "Enter the index of the patient to assign as short-term: ";
             std::cin >> choice;
+            std::cin.ignore(); // to clear input buffer
             doctor.addShortTerm_Patient(Patients.at(choice));
 
-        } else if (input == "4") {
+        } else if (input == "4") { //add long term patient
             Doctor doctor;
             //will need to pass a patient pointer here from patient vector as index
             std::cout << "Enter the index of the patient to assign as long-term: "; 
             std::cin >> choice;
+            std::cin.ignore(); // to clear input buffer
             doctor.addLongTerm_Patient(Patients.at(choice));
 
-        } else if (input == "5") {
+        } else if (input == "5") { //dismiss short term patient
             Doctor doctor;
             //will need to pass a short term patient pointer here from short term patient vector
             std::cout << "Enter the index of the short-term patient to dismiss: ";
             std::cin >> choice;
+            std::cin.ignore(); // to clear input buffer
             doctor.dismissShortTerm_Patient(ShortTerm_Patients.at(choice));
 
-        } else if (input == "6") {
+        } else if (input == "6") { //dismiss long term patient
             Doctor doctor;
             //will need to pass a long term patient pointer here from long term patient vector
             std::cout << "Enter the index of the long-term patient to dismiss: ";
             std::cin >> choice;
+            std::cin.ignore(); // to clear input buffer
             doctor.dismissLongTerm_Patient(LongTerm_Patients.at(choice));
 
-        } else if (input == "7") {
+        } else if (input == "7") { //persciption menu
             //will have a function here to call to use a perscription function
 
-        } else if (input == "8") {
+        } else if (input == "8") { //logout
             DoctorBool = false;
             std::cout << "Doctor logged out.\n";
 

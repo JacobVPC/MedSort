@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <limits>
 
 
 
@@ -29,7 +30,7 @@ void HospitalStaff::seePatients(std::vector<Patient*>& vec) const { //based of p
     std::cout<< "Showing patients in order of priority: \n";
     PrioritizePatients(vec);
     for (int i = 0; i < vec.size(); i++) {
-        std::cout << i << "." <<*vec.at(i);
+        std::cout <<"\n index:" << i << "." <<*vec.at(i);
     }
 
 
@@ -55,12 +56,16 @@ void Nurse::addPatient() const {
 
     std::cout << "Enter patient name: ";
     std::getline(std::cin, name);
+
     std::cout << "Enter patient age: ";
     std::cin >> age;
+
     std::cout << "Enter patient priority (1-5): ";
     std::cin >> priority;
+
     std::cout << "Enter patient sickness: ";
-    std::cin >> sickness;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //to ignroe newlnine
+    std::getline(std::cin, sickness);
 
     // Create a new patient and add it to the vector
     Patient* newPatient = new Patient(age, name, priority,sickness);
@@ -79,16 +84,16 @@ void Nurse::addPatient() const {
 //also has see patients from base class 
 //also has med inventory from base class
 void Doctor::seeAllPatients() const {
-    std::cout << "General Patients:\n";
+    std::cout << "\nGeneral Patients:\n";
     seePatients(Patients);
     
-    std::cout << "Short-Term Patients:\n";
+    std::cout << "\nShort-Term Patients:\n";
     for (int i = 0; i < ShortTerm_Patients.size(); i++) {
-        std::cout << i << "." << *ShortTerm_Patients.at(i);
+        std::cout <<"\n index:" << i << "." << *ShortTerm_Patients.at(i);
     }
-    std::cout << "Long-Term Patients:\n";
+    std::cout << "\nLong-Term Patients:\n";
     for (int i = 0; i < LongTerm_Patients.size(); i++) {
-        std::cout << i << "." << *LongTerm_Patients.at(i);
+        std::cout <<"\n index:" << i << "." << *LongTerm_Patients.at(i);
     }
 
 };
@@ -102,6 +107,7 @@ void Doctor::addShortTerm_Patient(Patient* p) const {
     std::getline(std::cin, timeAssessed);
     std::cout << "Enter perscription: ";
     std::getline(std::cin, perscription);
+
 
     // Create a new short term patient and add it to the vector and remove from patient vector
     ShortTerm_Patient* newShortTermPatient = new ShortTerm_Patient(p->getAge(), p->getName(), p->getPriority(), p->getSickness(), timeAssessed, perscription);
@@ -124,10 +130,13 @@ void Doctor::addLongTerm_Patient(Patient* p) const {
 
     std::cout << "Enter time assessed: ";
     std::getline(std::cin, timeAssessed);
+
     std::cout << "Enter time needed: ";
     std::getline(std::cin, TimeNeeded);
+
     std::cout << "Enter perscription: ";
     std::getline(std::cin, perscription);
+
 
     // makes a new longterm patient to add to new vector
     LongTerm_Patient* newLongTermPatient = new LongTerm_Patient(p->getAge(), p->getName(), p->getPriority(), p->getSickness(), timeAssessed, TimeNeeded, perscription);
