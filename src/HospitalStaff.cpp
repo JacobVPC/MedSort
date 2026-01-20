@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 
 
@@ -28,7 +29,7 @@ void HospitalStaff::seePatients(std::vector<Patient*>& vec) const { //based of p
     std::cout<< "Showing patients in order of priority: \n";
     PrioritizePatients(vec);
     for (int i = 0; i < vec.size(); i++) {
-        std::cout << *vec.at(i);
+        std::cout << i << "." <<*vec.at(i);
     }
 
 
@@ -50,6 +51,7 @@ void Nurse::addPatient() const {
     std::string name;
     int age;
     int priority;
+    std::string sickness;
 
     std::cout << "Enter patient name: ";
     std::getline(std::cin, name);
@@ -57,9 +59,11 @@ void Nurse::addPatient() const {
     std::cin >> age;
     std::cout << "Enter patient priority (1-5): ";
     std::cin >> priority;
+    std::cout << "Enter patient sickness: ";
+    std::cin >> sickness;
 
     // Create a new patient and add it to the vector
-    Patient* newPatient = new Patient(age, name, priority);
+    Patient* newPatient = new Patient(age, name, priority,sickness);
     Patients.push_back(newPatient);
     std::cout << "Patient added: " << *newPatient << "\n";
 
@@ -74,6 +78,20 @@ void Nurse::addPatient() const {
 
 //also has see patients from base class 
 //also has med inventory from base class
+void Doctor::seeAllPatients() const {
+    std::cout << "General Patients:\n";
+    seePatients(Patients);
+    
+    std::cout << "Short-Term Patients:\n";
+    for (int i = 0; i < ShortTerm_Patients.size(); i++) {
+        std::cout << i << "." << *ShortTerm_Patients.at(i);
+    }
+    std::cout << "Long-Term Patients:\n";
+    for (int i = 0; i < LongTerm_Patients.size(); i++) {
+        std::cout << i << "." << *LongTerm_Patients.at(i);
+    }
+
+};
 
 void Doctor::addShortTerm_Patient(Patient* p) const {
     //adds a short term patient from patient vector
@@ -86,7 +104,7 @@ void Doctor::addShortTerm_Patient(Patient* p) const {
     std::getline(std::cin, perscription);
 
     // Create a new short term patient and add it to the vector and remove from patient vector
-    ShortTerm_Patient* newShortTermPatient = new ShortTerm_Patient(p->getAge(), p->getName(), p->getPriority(), timeAssessed, perscription);
+    ShortTerm_Patient* newShortTermPatient = new ShortTerm_Patient(p->getAge(), p->getName(), p->getPriority(), p->getSickness(), timeAssessed, perscription);
     ShortTerm_Patients.push_back(newShortTermPatient);
 
     // Remove from general Patients vector
@@ -112,7 +130,7 @@ void Doctor::addLongTerm_Patient(Patient* p) const {
     std::getline(std::cin, perscription);
 
     // makes a new longterm patient to add to new vector
-    LongTerm_Patient* newLongTermPatient = new LongTerm_Patient(p->getAge(), p->getName(), p->getPriority(), timeAssessed, TimeNeeded, perscription);
+    LongTerm_Patient* newLongTermPatient = new LongTerm_Patient(p->getAge(), p->getName(), p->getPriority(), p->getSickness(), timeAssessed, TimeNeeded, perscription);
     LongTerm_Patients.push_back(newLongTermPatient);
 
     // Remove from Patients vector

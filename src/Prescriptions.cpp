@@ -71,7 +71,7 @@ Prescription& NameToPrescription(std::string Name, std::vector<Prescription>& ve
 Prescription& ManualPrescription(std::string Name,/*/Diognosis/*/ std::vector<Prescription>& vec){
     bool check = false;
     std::cout << "\n\n----------------------";
-    for(int i=0; i<vec.size(); i=i+1){
+    for(int i=0; i<vec.size(); i++){ 
         if(vec[i].GetName() == Name){
             if(vec[i].Stock <= 0){
                 std::cout << "\n\nThis item is not in stock.";
@@ -98,7 +98,7 @@ Prescription& AutomaticPrescription(std::string Target,/*/Diognosis/*/ std::vect
     std::string Temp_Stock;
     std::string Temp_Treatment;
     std::cout << "\n\n----------------------";
-    for(int i=0; i<vec.size(); i=i+1){
+    for(int i=0; i<vec.size(); i++){
         if (vec[i].GetTreatment() == Target){
             if (vec[i].Stock <= 0){
                 std::cout << "The Prescription is out of stock\n\n----------------------";

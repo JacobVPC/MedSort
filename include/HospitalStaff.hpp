@@ -39,6 +39,7 @@ class Doctor : public HospitalStaff{
 
 public:
 
+void seeAllPatients() const; //sees all patients in all vectors
 
 void addShortTerm_Patient(Patient* p) const;
 void addLongTerm_Patient(Patient* p) const;

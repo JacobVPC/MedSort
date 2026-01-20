@@ -6,7 +6,8 @@ std::string Patient::toString() const {
     return 
     "\n Age : " + std::to_string(age) + 
     "\n Patient Name : " +  name +
-    "\n Priority : " +  std::to_string(priority)+"\n";
+    "\n Priority : " +  std::to_string(priority)+"\n"
+    "\n Sickness : " + sickness + "\n";
 }
 
 
@@ -16,6 +17,7 @@ std::string ShortTerm_Patient::toString() const {
     "\n Age : " + std::to_string(age) + 
     "\n Short Term Patient Name : " +  name +
     "\n Priority : " +  std::to_string(priority) + 
+    "\n Sickness : " + sickness +
     "\n Time Assessed :" +  timeAssessed +
     "\n Perscription : " +perscription+"\n";
 }
@@ -27,6 +29,7 @@ std::string LongTerm_Patient::toString() const {
     "\n Age : " + std::to_string(age) + 
     "\n Long Term Patient Name : " +  name +
     "\n Priority : " +  std::to_string(priority) + 
+    "\n Sickness : " + sickness +
     "\n Time Assessed :" +  timeAssessed +
     "\n Time Needed : " + timeNeeded +
     "\n Perscription : " + perscription +"\n";
@@ -50,3 +53,7 @@ int Patient::getAge() const {
 std::string Patient::getName() const {
     return name;
 }
+
+std::string Patient::getSickness() const {
+    return sickness;
+}   
