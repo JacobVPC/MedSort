@@ -17,11 +17,22 @@ perscriptions simpler*/
 #include "include/Prescriptions.hpp"
 #include <iostream>
 #include <vector>
+#include <string>
+#include <limits>
 
 
 std::vector<Prescription> prescriptionVector;
 
 int main(){
+    if(PrescriptionFileCheck() == false){
+        FillPrescriptionVector(prescriptionVector);
+        AllPrescriptionToFile(prescriptionVector);
+    }
+    if(PrescriptionFileCheck() == true){
+        std::cout << "Loading prescriptions from file...\n";
+        FileToPrescription(prescriptionVector);
+    }
+
     //filler patients for testing
     Patient* p1 = new Patient(30, "John Doe", 2, "Flu");
     Patient* p2  = new Patient(45, "Jane Smith", 1, "Chest Pain");
@@ -31,8 +42,8 @@ int main(){
     Patient* p6  = new Patient(8,  "Emily Clark", 5, "Fever");
     Patient* p7  = new Patient(39, "David Wilson", 1, "Severe Allergic Reaction");
     Patient* p8  = new Patient(26, "Sarah Miller", 4, "Migraine");
-    Patient* p9  = new Patient(73, "George Thompson", 2, "Shortness of Breath");
-    Patient* p10 = new Patient(34, "Olivia Martin", 3, "Stomach Pain");
+    ShortTerm_Patient* p9  = new ShortTerm_Patient(73, "George Thompson", 2, "Shortness of Breath","11/28/2024","albuterol");
+    LongTerm_Patient* p10 = new LongTerm_Patient(34, "Olivia Martin", 3, "Stomach Pain","12/01/2024","2 weeks","antacid");
 
     Patients.push_back(p1);
     Patients.push_back(p2);
@@ -42,8 +53,8 @@ int main(){
     Patients.push_back(p6);
     Patients.push_back(p7);
     Patients.push_back(p8);
-    Patients.push_back(p9);
-    Patients.push_back(p10);
+    ShortTerm_Patients.push_back(p9);
+    LongTerm_Patients.push_back(p10);
 
 
 
@@ -92,7 +103,7 @@ int main(){
             Nurse nurse;
             nurse.seePatients(Patients);
         } else if (input == "3") {
-            //will have a function here to call to use a perscription function
+            PrescriptionMenu(prescriptionVector);
         }else if (input == "4") {
             NurseBool = false;
             std::cout << "Nurse logged out.\n";
@@ -119,7 +130,7 @@ int main(){
             //will need to pass a patient pointer here from patient vector as index
             std::cout << "Enter the index of the patient to assign as short-term: ";
             std::cin >> choice;
-            std::cin.ignore(); // to clear input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // to clear input buffer
             doctor.addShortTerm_Patient(Patients.at(choice));
 
         } else if (input == "4") { //add long term patient
@@ -127,7 +138,7 @@ int main(){
             //will need to pass a patient pointer here from patient vector as index
             std::cout << "Enter the index of the patient to assign as long-term: "; 
             std::cin >> choice;
-            std::cin.ignore(); // to clear input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // to clear input buffer
             doctor.addLongTerm_Patient(Patients.at(choice));
 
         } else if (input == "5") { //dismiss short term patient
@@ -135,7 +146,7 @@ int main(){
             //will need to pass a short term patient pointer here from short term patient vector
             std::cout << "Enter the index of the short-term patient to dismiss: ";
             std::cin >> choice;
-            std::cin.ignore(); // to clear input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // to clear input buffer
             doctor.dismissShortTerm_Patient(ShortTerm_Patients.at(choice));
 
         } else if (input == "6") { //dismiss long term patient
@@ -143,11 +154,11 @@ int main(){
             //will need to pass a long term patient pointer here from long term patient vector
             std::cout << "Enter the index of the long-term patient to dismiss: ";
             std::cin >> choice;
-            std::cin.ignore(); // to clear input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // to clear input buffer
             doctor.dismissLongTerm_Patient(LongTerm_Patients.at(choice));
 
         } else if (input == "7") { //persciption menu
-            //will have a function here to call to use a perscription function
+            PrescriptionMenu(prescriptionVector);
 
         } else if (input == "8") { //logout
             DoctorBool = false;

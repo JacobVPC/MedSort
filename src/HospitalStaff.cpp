@@ -62,6 +62,7 @@ void Nurse::addPatient() const {
 
     std::cout << "Enter patient priority (1-5): ";
     std::cin >> priority;
+    
 
     std::cout << "Enter patient sickness: ";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //to ignroe newlnine

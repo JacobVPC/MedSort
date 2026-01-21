@@ -1,30 +1,120 @@
+NA
+NA
+2000000000
 aspirin
+headaches
 10
-headache
 ibuprofen
+inflammation
 15
-pain
 paracetamol
-20
 fever
+20
 amoxicillin
-8
 infection
-cough syrup
-12
-cough
-loratadine
-18
-allergy
-omeprazole
 7
-acid reflux
+cough syrup
+cough
+12
+loratadine
+allergies
+18
+omeprazole
+reflux
+7
 metformin
-9
 diabetes
+9
 atorvastatin
-14
 cholesterol
-vitamin c
-25
-immune support
+14
+oseltamivir
+flu
+10
+nitroglycerin
+chest pain
+5
+ice pack
+sprained ankle
+30
+azithromycin
+pneumonia
+7
+lisinopril
+high blood pressure
+12
+acetaminophen
+fever
+15
+epinephrine
+severe allergic reaction
+1
+sumatriptan
+migraine
+8
+albuterol
+shortness of breath
+10
+antacid
+stomach pain
+20
+NA
+NA
+2000000000
+aspirin
+headaches
+10
+ibuprofen
+inflammation
+15
+paracetamol
+fever
+20
+amoxicillin
+infection
+8
+cough syrup
+cough
+12
+loratadine
+allergies
+18
+omeprazole
+reflux
+7
+metformin
+diabetes
+9
+atorvastatin
+cholesterol
+14
+oseltamivir
+flu
+10
+nitroglycerin
+chest pain
+5
+ice pack
+sprained ankle
+30
+azithromycin
+pneumonia
+7
+lisinopril
+high blood pressure
+12
+acetaminophen
+fever
+15
+epinephrine
+severe allergic reaction
+1
+sumatriptan
+migraine
+8
+albuterol
+shortness of breath
+10
+antacid
+stomach pain
+20

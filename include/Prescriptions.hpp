@@ -1,8 +1,8 @@
-#include <fstream> // Needed for file input/output
+//#include <fstream> // Needed for file input/output
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
+//#include <algorithm>
 
 /// prescription File Format
     //Name
@@ -35,6 +35,9 @@ public:
 
 std::ostream& operator<<(std::ostream& stream, const Prescription& P);
 
+std::vector<Prescription> FileToPrescription(std::vector<Prescription>& vec);
+
+bool PrescriptionFileCheck();
 
 void AllPrescriptionToFile(std::vector<Prescription> vec);
 
@@ -45,4 +48,8 @@ Prescription& ManualPrescription(std::string Name,/*/Diognosis/*/ std::vector<Pr
 //Automatic Prescription finder
 Prescription& AutomaticPrescription(std::string Target,/*/Diognosis/*/ std::vector<Prescription>& vec);
 
+Prescription& ListAndPerscribePrescription(std::vector<Prescription>& vec);
+
 void FillPrescriptionVector(std::vector<Prescription>&);
+
+Prescription PrescriptionMenu (std::vector<Prescription>& vec);
