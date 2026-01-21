@@ -48,6 +48,29 @@ void HospitalStaff::MedInventory() const {
 //also has see patients from base class 
 //also has med inventory from base class
 
+//recursive function
+double Nurse::sumPriorities(const std::vector<Patient*>& patients, int i) const {
+    // Base case
+    if (i >= patients.size()) {
+        return 0;
+    }
+    
+    // Recursive case: current priority + sum of remaining
+    return patients.at(i)->getPriority() + sumPriorities(patients, i + 1);
+}
+
+// Main function to calculate average
+void Nurse::averagePriority(const std::vector<Patient*>& patients) const {
+    if (patients.empty()) {
+        std::cout << "No patients to calculate average priority.\n";
+        return;
+    }
+    
+    double totalPriority = sumPriorities(patients, 0);
+    std::cout << "Average priority: " << (totalPriority) / patients.size() << "\n"; 
+}
+
+
 void Nurse::addPatient() const {
     std::string name;
     int age;

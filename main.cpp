@@ -56,7 +56,8 @@ int main(){
     ShortTerm_Patients.push_back(p9);
     LongTerm_Patients.push_back(p10);
 
-
+    Nurse nurse;
+    Doctor doctor;
 
 
 
@@ -73,12 +74,10 @@ int main(){
     
         std::getline(std::cin, input);
         if (input == "nurse") {
-            Nurse nurse;
             NurseBool = true;
             std::cout << "Nurse logged in.\n";
             
         } else if (input == "doctor") {
-            Doctor doctor;
             DoctorBool = true;
             std::cout << "Doctor logged in.\n";
 
@@ -92,21 +91,27 @@ int main(){
         
     }
 
+
     //nurse menu
     while (NurseBool == true) {
-        std::cout << "\nNurse Menu:\n1. Add Patient\n2. See Patients\n3. Go to persciption menu\n4. Logout\nEnter choice: ";
+        std::cout << "\nNurse Menu:\n1. Add Patient\n2. See Patients\n3. Go to persciption menu\n4. Average Priority\n5. Logout\nEnter choice: ";
         std::getline(std::cin, input);
         if (input == "1") {
-            Nurse nurse;
             nurse.addPatient();
+
         } else if (input == "2") {
-            Nurse nurse;
             nurse.seePatients(Patients);
+
         } else if (input == "3") {
             PrescriptionMenu(prescriptionVector);
-        }else if (input == "4") {
+
+        } else if (input == "4") {
+            nurse.averagePriority(Patients);
+
+        }else if (input == "5") {
             NurseBool = false;
             std::cout << "Nurse logged out.\n";
+
         } else {
             std::cout << "Invalid choice, try again.\n";
         }
@@ -118,15 +123,12 @@ int main(){
         std::getline(std::cin, input);
         int choice;
         if (input == "1") {  //see general patients only
-            Doctor doctor;
             doctor.seePatients(Patients);
 
         } else if (input == "2") { //see all patients
-            Doctor doctor;
             doctor.seeAllPatients();
 
         } else if (input == "3") { //add short term patient
-            Doctor doctor;
             //will need to pass a patient pointer here from patient vector as index
             std::cout << "Enter the index of the patient to assign as short-term: ";
             std::cin >> choice;
@@ -134,7 +136,6 @@ int main(){
             doctor.addShortTerm_Patient(Patients.at(choice));
 
         } else if (input == "4") { //add long term patient
-            Doctor doctor;
             //will need to pass a patient pointer here from patient vector as index
             std::cout << "Enter the index of the patient to assign as long-term: "; 
             std::cin >> choice;
@@ -142,7 +143,6 @@ int main(){
             doctor.addLongTerm_Patient(Patients.at(choice));
 
         } else if (input == "5") { //dismiss short term patient
-            Doctor doctor;
             //will need to pass a short term patient pointer here from short term patient vector
             std::cout << "Enter the index of the short-term patient to dismiss: ";
             std::cin >> choice;
@@ -150,7 +150,6 @@ int main(){
             doctor.dismissShortTerm_Patient(ShortTerm_Patients.at(choice));
 
         } else if (input == "6") { //dismiss long term patient
-            Doctor doctor;
             //will need to pass a long term patient pointer here from long term patient vector
             std::cout << "Enter the index of the long-term patient to dismiss: ";
             std::cin >> choice;

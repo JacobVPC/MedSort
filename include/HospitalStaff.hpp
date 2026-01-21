@@ -26,6 +26,9 @@ class Nurse : public HospitalStaff{
 
 public:
 
+double sumPriorities(const std::vector<Patient*>& patients, int i) const; //i is index and it wil be 0
+void averagePriority(const std::vector<Patient*>& patients) const;
+
 void addPatient() const;
 
 };
