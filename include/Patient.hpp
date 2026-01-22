@@ -51,6 +51,13 @@ public:
     timeAssessed(ta),
     perscription(per){}
 
+    std::string getTimeAssessed() const {
+        return timeAssessed;
+    }
+    std::string getPerscription() const {
+        return perscription;
+    }
+
     std::string toString() const override;
 
 };
@@ -75,6 +82,16 @@ public:
     timeAssessed(ta),
     timeNeeded(tn), 
     perscription(per){}
+
+    std::string getTimeAssessed() const {
+        return timeAssessed;
+    }
+    std::string getTimeNeeded() const {
+        return timeNeeded;
+    }
+    std::string getPerscription() const {
+        return perscription;
+    }
 
     std::string toString() const override;
 
