@@ -36,6 +36,8 @@ perscriptions simpler*/
 
 std::vector<Prescription> prescriptionVector;
 
+/*Rendering of normal patients*/
+
 ftxui::Element RenderPatientTable(const std::vector<Patient*>& patients) {
     using namespace ftxui;
 
@@ -72,6 +74,8 @@ ftxui::Element RenderPatientTable(const std::vector<Patient*>& patients) {
     return table.Render();
 }
 
+/*Rendering of normal patients*/
+
 ftxui::Element RenderPatientTable_(const std::vector<Patient*>& patients) {
     using namespace ftxui;
 
@@ -107,6 +111,8 @@ ftxui::Element RenderPatientTable_(const std::vector<Patient*>& patients) {
 
     return table.Render();
 }
+
+/*Rendering of all patients, and checks if its short term or long term to display the correct data*/
 
 ftxui::Element RenderPatientTable_1(const std::vector<ShortTerm_Patient*>& short_terms, const std::vector<LongTerm_Patient*>& long_terms) {
     using namespace ftxui;
@@ -347,7 +353,7 @@ int main(){
 
     auto screen = ScreenInteractive::Fullscreen();
 
-    int depth = 0;
+    int depth = 0; /*This is just a tracker to tell the code what depth(menu) to render, this could be any name*/
 
     /*
     The ButtonOption alows for smooth button switches and you can make it have color smoothing with the color pallet your going for but be carful the Animated color system
@@ -356,6 +362,8 @@ int main(){
 
     auto button_style = ButtonOption::Animated(Color::SpringGreen2, Color::GrayDark);
 
+
+    
 
     // Name headers
     std::string Log_in = "    Log in    ";
@@ -384,6 +392,15 @@ int main(){
     
     Component input_patient_index = Input(&patient_index_input, "Patient Index");
 
+    /*
+    This is for the login section, it has 2 input bars, one for the "Email" and "Password" and then the code to check if its right is inside the button in between the braces
+    Then it will set the depth to the correct menu
+
+    And then the rest is for the menus and what to render the button names kinda match but if you just like on the name it will take you to the container then the container
+    name will take you to the rendering
+
+    and then theres also dropdowns
+    */
 
     // Log in menu Buttons -- Depth 0
     Component input_Email = Input(&Email, "Email");
@@ -797,8 +814,11 @@ int main(){
     }, button_style);
 
     /*
-    Containers are kinda...dumb but usefull, you cant reuse buttons (have fun with variable naming lol) 
-    but its good for the layout because it keeps your tracking in the box
+    1 Container hold all the buttons you need for the corespoding rendering, Containers handles all the focusing
+
+    Containers are kinda...dumb but usefull, you cant reuse buttons (have fun with variable naming lol)
+
+    The Containers also have perameters to align the buttons verticaly or horizontaly
     */
 
     // Container Tree
@@ -900,6 +920,19 @@ int main(){
     
 
     /*
+    This is where all the rendering happens, Its kinda like a function it gets called later when it needs to, 
+    The rendering will take in: A Container(Optinal) followed by this [&] (Don't know what it is but I think you need it for the code), Then your code in braces
+
+    The Container does not need to be taken in, you can actualy render the buttons separate but id suggest only do that if the buttons will be in different spots
+    Example: Depth 9 on the doctor side and in the assess menu, the assign short and long term buttons and the back button are rendered separate and split from the
+    inputs by a separatory
+
+    in terms of vbox, hbox, and dbox, they have different uses
+    vbox/vertical box will flex to fill in all the virticaly space while fitting any text or buttons horizontaly unless told not to (size() command)
+    hbox/horizontal box will flex to fill in all the horizontal space while fitting any text or buttons virticaly unless told not to
+    dbox will just fill all the space it can unless told not to
+    you can but boxes inside of echother example: depth 0 (it renderas the background, then the ascii art, then the login menu while rendering inside a dbox in the return)
+
     size(WIDTH...) and size(HEIGHT...) are by line and colum not a set grid so if you want a kinda big box your width is gonna be >100
     size(..., Equal is just like operators, so: the LESS_THEN with a size of 20 will be 19. Recomended for sizeing boxes to just do equal)
     anything that comes after | (the straight line) is kinda like a modifier to the element
@@ -909,19 +942,19 @@ int main(){
     // depth 1 / Triage Menu rendering
     auto depth1 = Renderer(Tr, [&] {
         return vbox({
-            text(Menu_Name) | bold,
-            separatorHeavy() | color(Color::Red),
-            Tr->Render(),
-        }) | center | borderStyled(DOUBLE, Color::Red) | size(WIDTH, EQUAL, 120) | size(HEIGHT, EQUAL, 23) | bgcolor(Color::GreenLight);
+            text(Menu_Name) | bold, /*just link a print command but with modifiers*/
+            separatorHeavy() | color(Color::Red), /*types: separator(), separatorHeavy(), separatorLight(), separatorDashed(), separatorDouble(), and more(C:\ftxui\src\ftxui\dom\separator.cpp)*/
+            Tr->Render(), /*Render the whole container or example: depth 9, you can render one button*/
+        }) | center | borderStyled(DOUBLE, Color::Red) | size(WIDTH, EQUAL, 120) | size(HEIGHT, EQUAL, 23) | bgcolor(Color::GreenLight); /*modifiers for the whole return box*/
     });
 
     // depth 2 / Docter Menu rendering
     auto depth2 = Renderer(Doc, [&] {
         return vbox({
             text(Menu_Name) | bold,
-            separatorHeavy() | color(Color::Red),
+            separatorHeavy() | color(Color::Red), /*This uses the 16 colour pallet, The only 256 pallet iv encountered was setting the animation for the buttons*/
             Doc->Render(),
-        }) | center | borderStyled(DOUBLE, Color::Red) | size(WIDTH, EQUAL, 120) | size(HEIGHT, EQUAL, 23) | bgcolor(Color::GreenLight);
+        }) | center | borderStyled(DOUBLE, Color::Red) | size(WIDTH, EQUAL, 120) | size(HEIGHT, EQUAL, 23) | bgcolor(Color::GreenLight); /*also 16 colour pallet*/
     });
 
     // depth 3 / Add patient
@@ -1165,6 +1198,14 @@ int main(){
             });
     });
 
+    /*
+    This is the main container that holds all the menu renderings
+
+    This is inportant and because of one little mistake of forgeting to fill each new depth, it didnt focus when i got to that menu and it stressed me out so much why it was not working
+
+    also this whole menu system is an example off of this example from the ftxui github: https://arthursonzogni.github.io/FTXUI/examples/?file=component/modal_dialog_custom
+    */
+
     auto main_container = Container::Tab(
     {
         depth0,
@@ -1183,6 +1224,15 @@ int main(){
         depth13,
     },
     &depth);
+
+    /*
+    This is where it all comes together, This will then render the corect depth/menu when the depth tracker is changed
+
+    clear_under is just incase you have your boxes with no background it will clear any lines and stuff thats under it, so i could go with out it but it seems to work with it so im just leaving it
+
+    document is a Element witch is a node that provides all the basic structer for layouts and rendering (dont relly know but all i know is it was in the example and it works so i think its needed)
+    it first renders depth 0/Log in screen and then when a button is pressed it renders the correct one
+    */
 
     auto main_renderer = Renderer(main_container, [&] {
         Element document = depth0->Render();
@@ -1280,6 +1330,12 @@ int main(){
         }
         return document;
     });
+
+    /*
+    This screen.Loop(main_renderer); Loops everything together so that stuff renders correctly
+
+    man if i got a dollor for every time i said render I would have $24... Ctrl + F is useful
+    */
 
     screen.Loop(main_renderer);
     return 0;
